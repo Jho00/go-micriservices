@@ -24,6 +24,7 @@ func ProduceGetCustomerHandler(db *sql.DB) func(w http.ResponseWriter, r *http.R
 			channel <- customers
 		}()
 		customers := <- channel
+		close(channel)
 		w.Write(customers)
 	}
 }
@@ -51,6 +52,7 @@ func ProduceOrderCustomerHandler(db *sql.DB) func(w http.ResponseWriter, r *http
 			channel <- orders
 		}()
 		orders := <- channel
+		close(channel)
 		w.Write(orders)
 	}
 }

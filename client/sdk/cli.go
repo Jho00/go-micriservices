@@ -1,4 +1,4 @@
-package cmd
+package sdk
 
 import (
 	"fmt"
@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func GetCustomers() {
+func GetCustomers() string {
 	resp, err := http.Get("http://localhost:8080/getCustomers")
 	if err != nil {
 		log.Fatal(err)
@@ -21,11 +21,11 @@ func GetCustomers() {
 		log.Fatal(err)
 	}
 
-	log.Println(string(body))
+	return string(body)
 }
 
 
-func GetOrders(customerId int) {
+func GetOrders(customerId int) string {
 	resp, err := http.Get(fmt.Sprintf("http://localhost:8080/getOrders?id=%v", customerId))
 	if err != nil {
 		log.Fatal(err)
@@ -39,5 +39,5 @@ func GetOrders(customerId int) {
 		log.Fatal(err)
 	}
 
-	log.Println(string(body))
+	return string(body)
 }
