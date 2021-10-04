@@ -17,6 +17,10 @@ func main()  {
 	http.HandleFunc("/getOrders", internal.ProduceOrderCustomerHandler(db))
 
 
+	http.HandleFunc("/ws/getCustomers", internal.ProduceWsEndpointForCustomerApi(db))
+	http.HandleFunc("/ws/getOrders", internal.ProduceWsEndpointForOrderApi(db))
+
+
 
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
