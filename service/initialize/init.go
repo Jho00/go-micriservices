@@ -11,7 +11,7 @@ import (
 func Initialize() *sql.DB  {
 	log.Println("Start initialize")
 	connectionInfo := fmt.Sprintf("user=%v password=%v host=localhost dbname=%v sslmode=disable",
-		"postgres", "root", "postgres")
+		"postgres", "go-serivces", "postgres")
 	db, err := sql.Open("postgres", connectionInfo)
 
 	if err != nil {
@@ -40,7 +40,7 @@ func Initialize() *sql.DB  {
 	db.Close()
 
 	connectionInfo = fmt.Sprintf("user=%v password=%v host=localhost dbname=%v sslmode=disable",
-		"postgres", "root", "go")
+		"postgres", "go-serivces", "go")
 	db, err = sql.Open("postgres", connectionInfo)
 
 	if err != nil {

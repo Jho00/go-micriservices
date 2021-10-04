@@ -9,6 +9,8 @@ import (
 
 func ProduceGetCustomerHandler(db *sql.DB) func(w http.ResponseWriter, r *http.Request)  {
 	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 		channel := make(chan []byte)
 		go func() {
 			log.Println("Customer handler")
@@ -31,6 +33,8 @@ func ProduceGetCustomerHandler(db *sql.DB) func(w http.ResponseWriter, r *http.R
 
 func ProduceOrderCustomerHandler(db *sql.DB) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 		channel := make(chan []byte)
 		go func() {
 			log.Println("Order handler")

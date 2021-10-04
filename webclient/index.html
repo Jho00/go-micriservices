@@ -1,9 +1,91 @@
 <!DOCTYPE html>
 <html>
 <body>
+    <div>
+        <button onclick="getAllCustomers()">Get all customers</button>
+    </div>
 
-<h1>My First Heading</h1>
-<p>My first paragraph.</p>
+    <div class="customer-holder">
 
+    </div>
+
+    <hr>
+
+    <div id="orders-section" style="display: none">
+        <input type="text" placeholder="Customer ID" class="customer-id-input">
+        <button onclick="getOrderForCustomer()"> Find Orders</button>
+
+        <div class="order-holder">
+
+        </div>
+    </div>
+
+
+    <script>
+        const ROOT_URL = "http://localhost:8080";
+
+        function getOrderForCustomer() {
+            const url = `${ROOT_URL}/getOrders`;
+
+            /**
+             * @type {{OrderId: number, OrderName: string, CustomerId: number}} Order
+             * @param orders Array<Order>
+             */
+            const renderOrders = (orders) => {
+                const orderHolder = document.querySelector('.order-holder');
+                orderHolder.innerHTML = "";
+
+                for (let order of orders) {
+                    const orderBlock = document.createElement('div');
+                    orderBlock.innerText = `${order.OrderName} - ${order.OrderId}`;
+
+                    orderHolder.appendChild(orderBlock);
+                }
+            }
+
+            const customerId = document.querySelector('.customer-id-input').value;
+
+            fetch(`${url}?id=${customerId}`)
+                .then(r => r.json())
+                .then(result => {
+                    if (result.length === 0) {
+                        alert("There are no orders for the target customer");
+                        return;
+                    }
+                    renderOrders(result);
+                })
+                .catch(console.error);
+        }
+
+        function getAllCustomers() {
+            const url = `${ROOT_URL}/getCustomers`;
+
+            /**
+             * @type {{CustomerName: string, CustomerId: number}} Customer
+             *
+             * @param customers Array<Customer>
+             */
+            const renderCustomers = (customers) => {
+                const ordersSection = document.getElementById('orders-section');
+                ordersSection.style.display = 'block';
+
+                const customerHolder = document.querySelector('.customer-holder');
+                customerHolder.innerHTML = "";
+                for (let customer of customers) {
+                    const customerBlock = document.createElement('div');
+                    customerBlock.innerText = `${customer.CustomerName} - ${customer.CustomerId}`;
+
+                    customerHolder.appendChild(customerBlock);
+                }
+            }
+
+            fetch(url)
+                .then(r => r.json())
+                .then(result => {
+                    renderCustomers(result);
+                })
+                .catch(console.error);
+        }
+    </script>
 </body>
 </html>

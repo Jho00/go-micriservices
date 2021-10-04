@@ -13,7 +13,7 @@ func main() {
 	fmt.Println("Actions list:")
 	fmt.Println("1. Get all customers")
 	fmt.Println("2. Get all orders for customer")
-	fmt.Print("Enter action number: ") // TODO: print for each iteration
+	fmt.Print("Enter action number: ")
 	for scanner.Scan() {
 		text := scanner.Text()
 		action, err := strconv.Atoi(text)
