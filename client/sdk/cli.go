@@ -24,7 +24,6 @@ func GetCustomers() string {
 	return string(body)
 }
 
-
 func GetOrders(customerId int) string {
 	resp, err := http.Get(fmt.Sprintf("http://localhost:8080/getOrders?id=%v", customerId))
 	if err != nil {

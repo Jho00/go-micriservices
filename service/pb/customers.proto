@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option go_package = "go-microservices/pb";
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.pb";
+option java_outer_classname = "HelloWorldProto";
+
+package pb;
+
+service CustomerService {
+  rpc GetCustomers (GetCustomersRequest) returns (GetCustomersResponse) {}
+}
+
+message GetCustomersRequest {
+}
+
+message GetCustomersResponse {
+  repeated Customer customers = 1;
+}
+
+message Customer {
+  int32 Customerid = 1;
+  string Customername = 2;
+}

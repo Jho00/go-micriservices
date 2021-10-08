@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"time"
 )
 
 func ProduceGetCustomerHandler(db *sql.DB) func(w http.ResponseWriter, r *http.Request)  {
@@ -43,7 +42,7 @@ func ProduceOrderCustomerHandler(db *sql.DB) func(w http.ResponseWriter, r *http
 		log.Println(fmt.Sprintf("Order handler connections amount: %d", GetCounterInstance().Value()))
 		channel := make(chan []byte)
 		go func() {
-			time.Sleep(20 * time.Second)
+			//time.Sleep(20 * time.Second)
 
 			id := r.URL.Query().Get("id")
 			if id == "" {
